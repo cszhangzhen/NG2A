@@ -55,7 +55,7 @@ def main():
     parser.add_argument('--dropout_ratio', type=float, default=0.0, help='dropout ratio (default: 0)')
     parser.add_argument('--JK', type=str, default="last", help='how the node features are combined across layers. last, sum, max or concat')
     parser.add_argument('--dataset', type=str, default = 'zinc_standard_agent', help='root directory of dataset for pretraining')
-    parser.add_argument('--output_model_file', type=str, default = '', help='filename to output the model')
+    parser.add_argument('--output_model_file', type=str, default = 'init_weights/', help='filename to output the model')
     parser.add_argument('--gnn_type', type=str, default="gin")
     parser.add_argument('--seed', type=int, default=0, help = "Seed for splitting dataset.")
     parser.add_argument('--num_workers', type=int, default = 8, help='number of workers for dataset loading')
@@ -83,7 +83,7 @@ def main():
         print(train_loss)
 
         if epoch % 10 == 0:
-            torch.save(model.state_dict(), "./checkpoints/model7_" + str(epoch) + ".pth")
+            torch.save(model.state_dict(), args.output_model_file + "model_" + str(epoch) + ".pth")
 
 if __name__ == "__main__":
     main()
